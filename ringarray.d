@@ -5,7 +5,7 @@ struct ring(T,bool fifo=true,size_t size=64,
   T[size] data;
   ringint head;
   ringint tail;
-  T front(){return data[head];}
+  ref T front(){return data[head];}
   void popFront(){head++;}
   bool empty(){return head==tail;}
   T get(){
@@ -43,9 +43,9 @@ struct ring(T,bool fifo=true,size_t size=64,
       if(data==0){data=size-1;}
       else data--;
     }
-    void opAssign(typeof(data) a){
-      a= a%size;
-      data=a;
+    void opAssign(S)(S a){
+      a= cast(typeof(a))(a%size);
+      data=cast(typeof(data))a;
     }
     alias get this;
   }
