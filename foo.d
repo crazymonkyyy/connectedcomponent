@@ -23,6 +23,7 @@ struct fizz(T){
   }
 }
 alias buzz=foo!(bar!(fizz!ubyte));
+alias panic=foo!(bar!(fizz!(ubyte*)));
 
 unittest{
   buzz hello;
@@ -33,4 +34,9 @@ unittest{
   buzz* bye= &hello;
   *bye = ubyte(3);
   ubyte ahoy= *bye;
+}
+unittest{
+  ubyte bye=ubyte(2);
+  panic hello;
+  hello = &bye;
 }

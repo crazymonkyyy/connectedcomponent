@@ -1,8 +1,8 @@
-struct grouping(T,string filter){
+struct grouping(T,alias filter,alias groupidgen){
   T payload;
   typeof(++groupidgen) group=0;
   void opAssign(S)(S a){
-    if(mixin(filter)){
+    if(filter(*a)){
       payload=a;
       group=++groupidgen;
     }

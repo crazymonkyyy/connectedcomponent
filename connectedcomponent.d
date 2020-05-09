@@ -1,5 +1,34 @@
-T*[][] connectedcomponentfilter(alias filter,T,size_t x,size_t y)(ref T[x][y] data){
+T*[][] connectedcomponentfilter(string filter,T,size_t x,size_t y)(T[x][y] data){
+  mixin(import("group.mix"));
   size_t groupidgen;
+  mixin(import("stable.mix"));
+  alias selfgroupingpointers=stable!(grouping!(T*,filter));
+  
+  import ringarray;
+  ring!(selfgroupingpointers*,true,x+y,drophalf) unstables;
+  
+  import smart2darray;
+  array2d!(selfgroupingpointers,x,y) groupdata;
+  
+  //init:
+  foreach(i;0..x){
+  foreach(j;0..y){
+    import std.stdio; writeln(i,",",j,",",data[i][j]);
+    *groupdata[i,j]=&data[i][j];
+  }}
+  
+  T*[][] bar;
+  return bar;
+}
+unittest{
+  int[3][3] foo=[
+    [1,2,3],
+    [1,2,3],
+    [1,2,3] ];
+  auto bar=connectedcomponentfilter!("*a%2==0")(foo);
+}
+
+/*  size_t groupidgen;
   import ringarray;
   import smart2darray;
   alias elemtype=stable!(grouping!(T*));
@@ -33,15 +62,4 @@ T*[][] connectedcomponentfilter(alias filter,T,size_t x,size_t y)(ref T[x][y] da
       group(vec2(x,y));
     }
   }}
-  
-  T*[][] bar;
-  return bar;
-}
-unittest{
-  auto iseven(int a){return a%2==0;}
-  int[3][3] foo=[
-    [1,2,3],
-    [1,2,3],
-    [1,2,3] ];
-  auto bar=connectedcomponentfilter!(iseven)(foo);
-}
+  */
