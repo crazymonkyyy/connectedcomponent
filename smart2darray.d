@@ -3,7 +3,7 @@ struct array2d(T,size_t x,size_t y){
   auto opIndex(size_t i,size_t j){
     return &payload[i][j];
   }
-  void opIndexAssign(S)(S a,size_t i,size_t j){
+  void opIndexAssign(T a,size_t i,size_t j){
     payload[i][j]=a;}
   auto opIndex(T* where){
     struct vec2{size_t x;size_t y;}

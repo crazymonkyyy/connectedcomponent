@@ -1,7 +1,7 @@
 struct stable(T){
   T payload;alias payload this;
   bool isstable=false;
-  void opAssign(S)(S a){
+  void opAssign(T a){
     T temp=payload;
     payload=a;
     if(temp!=payload){isstable=false; unstables+=&this;}
