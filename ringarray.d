@@ -8,6 +8,7 @@ struct ring(T,bool fifo=true,size_t size=64,
   ref T front(){return data[head];}
   void popFront(){head++;}
   bool empty(){return head==tail;}
+  void makeempty(){tail=head;}
   T get(){
     T temp = front;
     popFront;
@@ -44,8 +45,7 @@ struct ring(T,bool fifo=true,size_t size=64,
       else data--;
     }
     void opAssign(S)(S a){
-      a= cast(typeof(a))(a%size);
-      data=cast(typeof(data))a;
+      data=cast(typeof(data))(a%size);
     }
     alias get this;
   }
@@ -139,5 +139,10 @@ unittest{
     else{foo.front.writeln;}
     foo.popFront;
   }
+}
+
+unittest{
+  ring!int foo;
+  foo.makeempty;
 }
 

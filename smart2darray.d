@@ -1,6 +1,8 @@
 struct array2d(T,size_t x,size_t y){
   T[x][y] payload; alias payload this;
-  auto opIndex(size_t i,size_t j){return &payload[i][j];}
+  auto opIndex(size_t i,size_t j){
+    return &payload[i][j];
+  }
   void opIndexAssign(S)(S a,size_t i,size_t j){
     payload[i][j]=a;}
   auto opIndex(T* where){
