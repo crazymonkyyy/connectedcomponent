@@ -1,9 +1,10 @@
 struct stable(T){
   T payload;alias payload this;
   bool isstable=false;
-  void opAssign(T a){
+  void opAssign(S)(S a){
     T temp=payload;
     payload=a;
     if(temp!=payload){isstable=false; unstables+=&this;}
   }
+  void set(T a){this= a;}
 }

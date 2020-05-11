@@ -22,10 +22,10 @@ T*[][] connectedcomponentfilter(string filter,T,size_t x,size_t y)(ref T[y][x] d
   foreach(j;0..y){
     void group(vec2)(vec2 a){
       alias g=groupdata;
-      if(a.y>0  ){g[a.x  ,a.y-1]=*g[a.x,a.y].payload;}
-      if(a.y<y-1){g[a.x  ,a.y+1]=*g[a.x,a.y].payload;}
-      if(a.x<x-1){g[a.x+1,a.y  ]=*g[a.x,a.y].payload;}
-      if(a.x>0  ){g[a.x-1,a.y  ]=*g[a.x,a.y].payload;}
+      if(a.y>0  ){g[a.x  ,a.y-1].set(g[a.x,a.y].payload);}
+      if(a.y<y-1){g[a.x  ,a.y+1].set(g[a.x,a.y].payload);}
+      if(a.x<x-1){g[a.x+1,a.y  ].set(g[a.x,a.y].payload);}
+      if(a.x>0  ){g[a.x-1,a.y  ].set(g[a.x,a.y].payload);}
     }
     while(!unstables.empty){
       import std.stdio; writeln("I'm running unstables");
