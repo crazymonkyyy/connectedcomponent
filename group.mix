@@ -1,10 +1,10 @@
 struct grouping(T,string filter){
   T payload;
-  typeof(groupidgen++) group=0;
-  void opAssign(T a){
+  typeof(++groupidgen) group=0;
+  void opAssign(S)(S a){
     if(mixin(filter)){
       payload=a;
-      group=groupidgen++;
+      group=++groupidgen;
     }
   }
   bool isnull(){return group==0;}

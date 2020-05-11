@@ -8,3 +8,17 @@ struct stable(T){
   }
   void set(T a){this= a;}
 }
+
+/*
+so this style caused me some mirgrines, in the future I should remember to always always
+always make every op overload "(S)(S a)" and not merely T a, and have a way to force it
+to a single T with a function, the error messages are awful and I was chasing wrong leads
+a maybe rewrite everything to have "stableset" "groupset", to force the overload to be what
+I believe it to be in the moment.
+
+"set" here put me on the right track of what was wrong instantly and I should remember that
+
+also swap compilers, dmd was giving me a segfualt when it was a template scoping errors 
+that it eronously compiled.
+
+next time I give it a go hopeful i'll remember */
